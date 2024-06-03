@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -11,8 +12,9 @@ import {
 import { Card } from "@/components/ui/card";
 import ListItem from "./ListItem";
 import { TodoType } from "@/lib/types";
+import { useState } from "react";
 
-const todos: TodoType[] = [
+const dummyTodos: TodoType[] = [
   {
     id: "INV001",
     title: "Job to do 1",
@@ -50,6 +52,8 @@ const todos: TodoType[] = [
 ];
 
 export function TodoList() {
+  const [todos, setTodos] = useState<TodoType[]>(dummyTodos);
+
   return (
     <Card className="w-[700px] m-auto">
       <Table>
