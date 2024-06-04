@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,14 +9,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTodo } from "../_contexts/TodoContext";
+import { TodoType } from "@/lib/types";
 
-type Props = {};
+const AddTodo = () => {
+  const { todos, setTodos } = useTodo();
+  const [inputVal, setInputVal] = useState<string>("");
 
-const AddTodo = (props: Props) => {
+  function addHandler() {
+    const newTodo: TodoType = {
+      id: "new id",
+      title: inputVal,
+      status: "PENDING",
+      team: "my-1",
+    };
+    setTodos([...todos, newTodo]);
+  }
   return (
     <div className="flex gap-2 max-w-[700px] m-auto mb-[40px]">
-      <Input type="text" placeholder="Todo Title" />
-      <Button variant={"outline"}>Add</Button>
+      <Input
+        type="text"
+        placeholder="Todo Title"
+        onChange={(e) => setInputVal(e.target.value)}
+      />
+      <Button variant={"outline"} onClick={addHandler}>
+        Add
+      </Button>
       <div>
         <Select>
           <SelectTrigger className="w-[180px]">

@@ -13,47 +13,10 @@ import { Card } from "@/components/ui/card";
 import ListItem from "./ListItem";
 import { TodoType } from "@/lib/types";
 import { useState } from "react";
-
-const dummyTodos: TodoType[] = [
-  {
-    id: "INV001",
-    title: "Job to do 1",
-    status: "PENDING",
-    team: "My-1",
-  },
-
-  {
-    id: "INV001",
-    title: "Job to do 2",
-    status: "DONE",
-    team: "My-1",
-  },
-
-  {
-    id: "INV001",
-    title: "Job to do 3",
-    status: "PENDING",
-    team: "My-1",
-  },
-
-  {
-    id: "INV001",
-    title: "Job to do 4",
-    status: "PENDING",
-    team: "My-1",
-  },
-
-  {
-    id: "INV001",
-    title: "Job to do 5",
-    status: "PENDING",
-    team: "My-1",
-  },
-];
+import { useTodo } from "../_contexts/TodoContext";
 
 export function TodoList() {
-  const [todos, setTodos] = useState<TodoType[]>(dummyTodos);
-
+  const { todos } = useTodo();
   return (
     <Card className="w-[700px] m-auto">
       <Table>
@@ -67,8 +30,8 @@ export function TodoList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {todos.map((todo) => (
-            <ListItem key={todo.id} todo={todo} />
+          {todos.map((todo, index) => (
+            <ListItem key={index} todo={todo} />
           ))}
         </TableBody>
         <TableFooter>
